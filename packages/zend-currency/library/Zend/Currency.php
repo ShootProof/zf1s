@@ -115,8 +115,10 @@ class Zend_Currency
             $this->_options['name']     = self::getName($options, $this->_options['locale']);
         }
 
-        if (!isset($this->_options['symbol']) || !is_array($options)) {
+        if (!isset($this->_options['symbol']) && !is_array($options)) {
             $this->_options['symbol']   = self::getSymbol($options, $this->_options['locale']);
+        } else if (!isset($this->_options['symbol']) && is_array($options) && isset($options['currency'])) {
+            $this->_options['symbol']   = self::getSymbol($options['currency'], $this->_options['locale']);
         }
 
         if (($this->_options['currency'] === null) and ($this->_options['name'] === null)) {

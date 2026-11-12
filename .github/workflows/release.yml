@@ -8,6 +8,9 @@ on:
         required: false
         default: ''
 
+permissions:
+  contents: read
+
 jobs:
   split:
     name: split ${{ matrix.package }}
@@ -112,6 +115,8 @@ jobs:
           client-id: ${{ secrets.SPLIT_APP_ID }}
           private-key: ${{ secrets.SPLIT_APP_PRIVATE_KEY }}
           owner: zf1s
+          repositories: ${{ matrix.package }}
+          permission-contents: write
 
       - name: Checkout code
         uses: actions/checkout@v6
@@ -146,6 +151,8 @@ jobs:
     needs: split
     runs-on: ubuntu-latest
     if: inputs.tag != ''
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v6

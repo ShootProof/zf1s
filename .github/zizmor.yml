@@ -1,0 +1,7 @@
+# Anything at medium severity or above fails the Zizmor workflow. Record
+# accepted findings here by `file:line`, so a moved line shows up again.
+rules:
+  # Dependabot waits 3 days before a version update unless told otherwise.
+  dependabot-cooldown:
+    config:
+      days: 3
